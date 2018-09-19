@@ -37,8 +37,7 @@ class AddContact extends Component {
         const newContact = {
             name,
             email,
-            phone,
-            id: uuid()
+            phone
         };
 
         //// SUBMIT CONTACT ////
