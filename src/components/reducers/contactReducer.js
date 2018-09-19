@@ -6,10 +6,11 @@
  * Milner.io
  */
 
-import { GET_CONTACTS, ADD_CONTACT, DELETE_CONTACT } from '../../actions/types';
+import {GET_CONTACTS, ADD_CONTACT, DELETE_CONTACT, GET_CONTACT, UPDATE_CONTACT} from '../../actions/types';
 
 const initialState = {
-    contacts: []
+    contacts: [],
+    contact: {}
 };
 
 export default (state = initialState, action) => {
@@ -20,10 +21,24 @@ export default (state = initialState, action) => {
                 contacts: action.payload
             }
         }
+        case GET_CONTACT: {
+            return {
+                ...state,
+                contact: action.payload
+            }
+        }
         case ADD_CONTACT: {
             return {
                 ...state,
                 contacts: [action.payload, ...state.contacts]
+            }
+        }
+        case UPDATE_CONTACT: {
+            return {
+                ...state,
+                contacts: state.contacts.map( (contact) => {
+                    return (contact.id === action.payload.id) ? action.payload : contact;
+                })
             }
         }
         case DELETE_CONTACT: {
